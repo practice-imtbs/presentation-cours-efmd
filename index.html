@@ -20,7 +20,7 @@
 html,body{margin:0;background:#fff;color:#000}
 body{font-family:var(--sans);line-height:1.4;-webkit-font-smoothing:antialiased;position:relative;font-size:15px}
 button{font:inherit}
-.page{max-width:1040px;margin:0 auto;padding:14px 16px 10px}
+.page{max-width:840px;margin:0 auto;padding:14px 16px 10px}
 
 /* ---------- Bandeau : logo, titre deux registres, langue ---------- */
 .bandeau{position:relative;display:flex;align-items:center;gap:18px;padding:0 0 12px;border-bottom:1px solid var(--violet-20);overflow:hidden}
@@ -102,15 +102,36 @@ h1 .accent{font-weight:700;color:var(--bleu)}
 .lecteur footer{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;padding:10px 14px}
 .lecteur footer .btn{padding:.6em .9em;font-size:.8rem}
 
-@media (max-width:760px){
-  .grille{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .recherche{margin-left:0;width:100%}
-  .champ{flex:1}
-  .bandeau::after{display:none}
-}
-@media (max-width:420px){
+/* Cadre Moodle étroit (520 à 860 px) : on garde 4 colonnes, cartes resserrées, pour une hauteur stable */
+@media (max-width:860px){
+  .page{padding:10px 10px 8px}
+  .bandeau{gap:12px;padding-bottom:8px}
   .bandeau img{height:40px}
+  .bandeau::after{display:none}
+  .chapo{font-size:.74rem}
+  .outils{gap:6px 12px;padding:8px 0}
+  .puce{padding:.22em .5em;font-size:.72rem}
+  .recherche{margin-left:0;flex:1 1 100%}
+  .champ{flex:1}
+  .grille{gap:8px}
+  .corps{padding:6px 7px 7px;gap:4px}
+  .cours h3{font-size:.74rem}
+  .meta{font-size:.62rem}
+  .meta .prof{display:none}
+  .vignette .code{font-size:.6rem;padding:.25em .4em}
+  .vignette .lire{right:5px;bottom:5px}
+  .vignette .lire i{width:22px;height:22px}
+  .vignette .lire i::before{border-left-width:7px;border-top-width:5px;border-bottom-width:5px}
+  .vignette .lire b{height:22px;font-size:.6rem}
+  .actions{gap:4px}
+  .btn{font-size:.64rem;padding:.45em .25em;gap:3px}
+  .btn svg{width:9px;height:9px}
+  .pied{margin-top:8px;font-size:.56rem}
+}
+@media (max-width:520px){
+  .grille{grid-template-columns:repeat(2,minmax(0,1fr))}
   .chapo{display:none}
+  .meta .prof{display:inline}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
