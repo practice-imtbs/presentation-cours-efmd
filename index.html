@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Zilla+Slab:wght@300;400&display=swap" rel="stylesheet">
 <style>
-/* Scène fixe 1280 x 720 (16:9), mise à l'échelle pour remplir le cadre, comme un Genially */
+/* Scène de base 1280 x 720 (16:9), mise à l'échelle et étirée pour remplir tout le cadre, comme un Genially */
 :root{
   --violet:#AD1D89; --violet-fonce:#8A176D; --bleu:#00B8DE; --noir:#000; --blanc:#fff;
   --violet-10:#F7E8F3; --violet-20:#E7D2E2; --gris:rgba(0,0,0,.62);
@@ -48,12 +48,12 @@ h1 .accent{font-weight:700;color:var(--bleu)}
     linear-gradient(135deg,transparent calc(60% - .6px),var(--bleu) calc(60% - .6px),var(--bleu) calc(60% + .6px),transparent calc(60% + .6px));opacity:0}
 
 /* ---------- Grille 4 x 4 ---------- */
-.grille{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:12px;margin:14px 0 0;padding:0;list-style:none;min-height:0}
-.cours{display:flex;border:1px solid var(--violet-20);background:#fff;min-width:0;min-height:0;transition:border-color .2s}
-.cours:hover{border-color:var(--violet)}
+.grille{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:14px;margin:14px 0 0;padding:0;list-style:none;min-height:0}
+.cours{display:flex;border:1.5px solid var(--violet);background:#fff;min-width:0;min-height:0;transition:border-color .2s,box-shadow .2s}
+.cours:hover{border-color:var(--bleu);box-shadow:inset 0 0 0 1.5px var(--bleu)}
 .cours[hidden]{display:none}
-.vignette{position:relative;flex:none;width:112px;height:100%;padding:0;border:0;border-right:1px solid var(--violet-10);background:#fff;cursor:pointer;overflow:hidden}
-.vignette img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.vignette{position:relative;flex:none;width:112px;height:100%;padding:0;border:0;border-right:1.5px solid var(--violet-20);background:#fff;cursor:pointer;overflow:hidden}
+.vignette img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .35s ease}
 .cours:hover .vignette img{transform:scale(1.06)}
 .vignette .lire{position:absolute;left:6px;bottom:6px;display:flex}
 .vignette .lire i{display:grid;place-items:center;width:26px;height:26px;background:var(--violet);transition:background .2s}
@@ -184,9 +184,12 @@ const triangle = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true
 
 /* Mise à l'échelle de la scène : remplit la largeur du cadre, centrée si le cadre n'est pas en 16:9 */
 function ajuster(){
+  /* La scène occupe tout le cadre : échelle sur le côté limitant, l'autre côté s'étire (aucune bande blanche) */
   const s = Math.min(innerWidth / 1280, innerHeight / 720);
   const sc = $("#scene");
-  sc.style.transform = `translate(${(innerWidth - 1280 * s) / 2}px, ${(innerHeight - 720 * s) / 2}px) scale(${s})`;
+  sc.style.width = (innerWidth / s) + "px";
+  sc.style.height = (innerHeight / s) + "px";
+  sc.style.transform = `scale(${s})`;
 }
 addEventListener("resize", ajuster);
 
